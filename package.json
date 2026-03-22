@@ -1,0 +1,39 @@
+{
+  "name": "json-to-ts-generator",
+  "version": "1.0.0",
+  "description": "Generate TypeScript types from JSON instantly. Works with files, stdin, or inline JSON.",
+  "main": "dist/index.js",
+  "bin": {
+    "json-to-ts": "dist/bin/json-to-ts.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "ts-node bin/json-to-ts.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "json",
+    "typescript",
+    "type-generation",
+    "cli",
+    "developer-tools",
+    "types",
+    "schema"
+  ],
+  "author": "Darner Diaz",
+  "license": "MIT",
+  "type": "commonjs",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DarnerDiaz/json-to-ts-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DarnerDiaz/json-to-ts-generator/issues"
+  },
+  "homepage": "https://github.com/DarnerDiaz/json-to-ts-generator#readme",
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
