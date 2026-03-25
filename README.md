@@ -338,3 +338,4 @@ If you find this useful, please star the repo! It helps others discover the tool
 # Co-author 4
 # Co-author 5
 # MERGER proper merge test
+# JSON Validation
