@@ -54,6 +54,7 @@ function parseArguments(args: string[]): ParsedArgs {
     handleNull: true,
     useUnknown: true,
     indent: 2,
+    convertCase: false,
   };
 
   for (let i = 0; i < args.length; i++) {
@@ -63,6 +64,8 @@ function parseArguments(args: string[]): ParsedArgs {
       result.type = true;
     } else if (arg === '--readonly' || arg === '-r') {
       result.readonly = true;
+    } else if (arg === '--convert-case' || arg === '-c') {
+      result.convertCase = true;
     } else if (arg === '--unknown' || arg === '-u') {
       result.useUnknown = true;
     } else if (arg === '--any') {
@@ -138,6 +141,7 @@ function printHelp(): void {
     -n, --name <name>    Interface name (default: Root)
     -t, --type           Output as 'type' instead of 'interface'
     -r, --readonly       Mark all properties as readonly
+    -c, --convert-case   Convert snake_case to camelCase
     -u, --unknown        Use 'unknown' instead of 'any' (default)
     --any                Use 'any' instead of 'unknown'
     --no-null            Exclude null values from type inference
@@ -150,6 +154,7 @@ function printHelp(): void {
   Examples:
     json-to-ts package.json
     json-to-ts -n User -t '{"id":1,"name":"John"}'
+    json-to-ts -c '{"first_name":"John","last_name":"Doe"}'
     cat api-response.json | json-to-ts -n ApiResponse
     json-to-ts data.json -o types.ts
   `);

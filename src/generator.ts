@@ -12,7 +12,15 @@ export class JsonToTypeScriptGenerator {
       handleNull: options.handleNull !== false,
       useUnknown: options.useUnknown !== false,
       indent: options.indent || 2,
+      convertCase: options.convertCase || false,
     };
+  }
+
+  /**
+   * Convert snake_case to camelCase
+   */
+  private snakeToCamel(str: string): string {
+    return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
   }
 
   /**
@@ -33,8 +41,9 @@ export class JsonToTypeScriptGenerator {
   private extractProperties(obj: Record<string, JsonValue>): PropertyDefinition[] {
     return Object.entries(obj).map(([key, value]) => {
       const typeInfo = this.inferType(value);
+      const propertyName = this.options.convertCase ? this.snakeToCamel(key) : key;
       return {
-        name: key,
+        name: propertyName,
         typeInfo,
         isArray: Array.isArray(value),
         isObject: typeof value === 'object' && value !== null && !Array.isArray(value),

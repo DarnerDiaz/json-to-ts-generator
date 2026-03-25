@@ -23,6 +23,8 @@ export interface TypeGeneratorOptions {
   useUnknown?: boolean;
   /** Indent spacing (default: 2) */
   indent?: number;
+  /** Convert snake_case properties to camelCase (default: false) */
+  convertCase?: boolean;
 }
 
 export interface TypeInfo {
