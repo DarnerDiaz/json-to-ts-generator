@@ -157,6 +157,21 @@ interface Config {
 }
 ```
 
+### Convert snake_case to camelCase
+
+```bash
+json-to-ts -c -n User '{"first_name":"John","last_name":"Doe","email_address":"john@example.com"}'
+```
+
+Output:
+```typescript
+interface User {
+  firstName: string;
+  lastName: string;
+  emailAddress: string;
+}
+```
+
 ### Complex Nested Data
 
 ```bash
@@ -226,6 +241,7 @@ Options:
   -n, --name <name>    Interface name (default: Root)
   -t, --type           Output as 'type' instead of 'interface'
   -r, --readonly       Mark all properties as readonly
+  -c, --convert-case   Convert snake_case properties to camelCase
   -u, --unknown        Use 'unknown' instead of 'any' (default)
   --any                Use 'any' instead of 'unknown'
   --no-null            Exclude null values  
