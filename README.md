@@ -286,6 +286,13 @@ json-to-ts --help
 
 ---
 
+## � Featured On
+
+- **Dev.to:** [Generate TypeScript Types From JSON in Seconds – No Configuration](https://dev.to/darnerdiaz/-generate-typescript-types-from-json-in-seconds-no-configuration-4ggf)
+- **LinkedIn:** [Professional announcement](https://www.linkedin.com/posts/darnerdiaz_typescript-javascript-devtools-share-7442376011318579201-Z9zl)
+
+---
+
 ## 📄 License
 
 MIT © 2026 Darner Diaz
@@ -304,4 +311,6 @@ Contributions welcome! Feel free to:
 
 If you find this useful, please star the repo! It helps others discover the tool.
 
-[⭐ Star on GitHub](https://github.com/DarnerDiaz/json-to-ts-generator)
+- [⭐ Star on GitHub](https://github.com/DarnerDiaz/json-to-ts-generator)
+- [👍 Read the full article](https://dev.to/darnerdiaz/-generate-typescript-types-from-json-in-seconds-no-configuration-4ggf)
+- [💼 Discuss on LinkedIn](https://www.linkedin.com/posts/darnerdiaz_typescript-javascript-devtools-share-7442376011318579201-Z9zl)
