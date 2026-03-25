@@ -3,6 +3,7 @@ import type { JsonValue, TypeGeneratorOptions, PropertyDefinition, TypeInfo } fr
 export class JsonToTypeScriptGenerator {
   private options: Required<TypeGeneratorOptions>;
   private processedTypes: Map<string, string> = new Map();
+  private nestedTypeCounter: number = 0;
 
   constructor(options: TypeGeneratorOptions = {}) {
     this.options = {
@@ -20,7 +21,7 @@ export class JsonToTypeScriptGenerator {
    * Convert snake_case to camelCase
    */
   private snakeToCamel(str: string): string {
-    return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
+    return str.replace(/_([a-z0-9])/g, (_, letter) => letter.toUpperCase());
   }
 
   /**
@@ -56,7 +57,8 @@ export class JsonToTypeScriptGenerator {
    */
   private inferType(value: JsonValue): TypeInfo {
     if (value === null) {
-      return { type: 'null', required: false };
+      const nullType = this.options.useUnknown ? 'unknown' : 'any';
+      return { type: nullType, required: false };
     }
 
     if (typeof value === 'string') {
@@ -86,7 +88,9 @@ export class JsonToTypeScriptGenerator {
     }
 
     if (typeof value === 'object') {
-      const objType = `I${this.options.name}${this.processedTypes.size}`;
+      const objType = `I${this.options.name}${this.nestedTypeCounter}`;
+      this.nestedTypeCounter++;
+      this.processedTypes.set(objType, objType);
       return { type: objType, required: true, nestedType: objType };
     }
 
