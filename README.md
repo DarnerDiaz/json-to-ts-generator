@@ -332,3 +332,4 @@ If you find this useful, please star the repo! It helps others discover the tool
 - [💼 Discuss on LinkedIn](https://www.linkedin.com/posts/darnerdiaz_typescript-javascript-devtools-share-7442376011318579201-Z9zl)
 # YOLO test feature
 # MERGER test feature
+# Co-author 1
