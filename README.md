@@ -92,6 +92,7 @@ interface Root {
 📦 **Array Support** - Correctly infers array item types  
 🎯 **CLI & Programmatic** - Use as CLI tool or import in code  
 🏗️ **Production Ready** - Battle-tested type inference  
+✅ **Schema Validation** - Validate JSON objects against generated types  
 
 ---
 
