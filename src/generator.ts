@@ -1,9 +1,31 @@
 import type { JsonValue, TypeGeneratorOptions, PropertyDefinition, TypeInfo } from './types';
 
+/**
+ * Generates TypeScript interfaces from JSON objects
+ * Supports configuration for naming, readonly properties, null handling, and case conversion
+ * @example
+ * ```typescript
+ * const generator = new JsonToTypeScriptGenerator({ name: 'User', type: true });
+ * const json = { id: 1, name: 'John', email: 'john@example.com' };
+ * const typescript = generator.generate(json);
+ * // type User = { id: number; name: string; email: string; }
+ * ```
+ */
 export class JsonToTypeScriptGenerator {
   private options: Required<TypeGeneratorOptions>;
   private processedTypes: Map<string, string> = new Map();
 
+  /**
+   * Creates a new JsonToTypeScriptGenerator instance
+   * @param {TypeGeneratorOptions} options - Configuration options
+   * @param {string} [options.name='Root'] - Name for generated type/interface
+   * @param {boolean} [options.type=false] - Generate 'type' instead of 'interface'
+   * @param {boolean} [options.readonly=false] - Make all properties readonly
+   * @param {boolean} [options.handleNull=true] - Include null in union types
+   * @param {boolean} [options.useUnknown=true] - Use 'unknown' instead of 'any'
+   * @param {number} [options.indent=2] - Number of spaces for indentation
+   * @param {boolean} [options.convertCase=false] - Convert snake_case to camelCase
+   */
   constructor(options: TypeGeneratorOptions = {}) {
     this.options = {
       name: options.name || 'Root',
@@ -18,13 +40,22 @@ export class JsonToTypeScriptGenerator {
 
   /**
    * Convert snake_case to camelCase
+   * @private
    */
   private snakeToCamel(str: string): string {
     return str.replace(/_([a-z])/g, (_, letter) => letter.toUpperCase());
   }
 
   /**
-   * Main method to convert JSON to TypeScript
+   * Main method to convert JSON object to TypeScript interface/type
+   * @param {JsonValue} json - JSON object to convert (must be an object, not array or primitive)
+   * @returns {string} Generated TypeScript interface or type definition
+   * @throws {Error} If input is not a valid JSON object
+   * @example
+   * ```typescript
+   * const json = { name: 'Alice', age: 25, active: true };
+   * const ts = generator.generate(json);
+   * ```
    */
   generate(json: JsonValue): string {
     if (typeof json !== 'object' || json === null || Array.isArray(json)) {
@@ -37,6 +68,7 @@ export class JsonToTypeScriptGenerator {
 
   /**
    * Extract properties from JSON object
+   * @private
    */
   private extractProperties(obj: Record<string, JsonValue>): PropertyDefinition[] {
     return Object.entries(obj).map(([key, value]) => {
